@@ -41,6 +41,21 @@ class ReportListForAdmin(generic.ListView):
 	def get_queryset(self):
 		return Report.objects.all()
 
+def search(request):
+	try:
+		if request.method == 'GET':
+			new_search = Blogpost.objects.filter(Q(name__icontains = request.GET['q']) |
+		 Q(subject__icontains= request.GET['q']) | Q(message__icontains = request.GET['q']) ).exclude(
+		 pub = False
+				)
+		if new_search:
+			context = {'new_search':new_search}
+			return render(request, 'rammyblog/search.html', context)
+		else:
+			return render(request, 'rammyblog/404.html')
+
+	except MultiValueDictKeyError as e:
+		return render(request, 'rammyblog/404.html')
 
 
 # class CreateReport(generic.CreateView):

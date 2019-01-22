@@ -21,12 +21,12 @@ MEDIA_DIR = os.path.join(BASE_DIR,'media')
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '=9gag!t#clmm1rr=%$w5v3%$ot3-(nzqf=gn#u(9r3-$jv$4d4'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'eyeo.herokuapp.com']
 
 
 # Application definition
@@ -121,11 +121,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+#location where django collect all static files
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
+# location where you will store your static files
+STATICFILES_DIRS = [os.path.join(BASE_DIR,'witness/static')
+]
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL= '/media/'
 EMAIL_HOST = 'smtp.zoho.com'
 EMAIL_HOST_USER = 'admin@rammyblog.com.ng'
-EMAIL_HOST_PASSWORD = 'timilehin'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'

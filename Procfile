@@ -1,0 +1,1 @@
+web: gunicorn witness.wsgi --log-file -
