@@ -1,0 +1,20 @@
+{% extends 'eyewitness/base.html' %}
+{% block contents %}
+{% load bootstrap4 %}
+<div class="jumbotron">
+  <p class="display-4"> Delete An Eye Witness Report</p>
+</div>
+<div class="container">
+s
+</div>
+
+<form method="POST">
+  {% csrf_token %}
+  {% bootstrap_form form layout='inline'    %}
+  <input type="submit" class="btn btn-danger" value="Submit">
+
+</form>
+{% endblock %}
+
+
+

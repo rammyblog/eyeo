@@ -1,0 +1,37 @@
+{% extends 'eyewitness/base.html' %}
+{% block contents %}
+<div class="figure flex-center">
+<div class="container">
+  <div class="figure-text">
+  <h1 class="bold">Welcome To EyeO!</h1><p>This Website allows you to report any anonymosly to the World!</p>
+  <p>If you've been the victim of a crime or think you have witnessed one, you can drop the details of the incident here and we would help pubish to the world!. Your information could be used to prevent other crimes and help keep other people safe. Find out about the different ways of reporting a crime.</p>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+</div>
+
+	</div>
+</div>
+
+<hr><br><br><br>
+
+<div class="container">
+	<p class="btn btn-danger latest">LATEST REPORTS</p>
+<div class="row">
+  {% for report in reports %}
+    <div class="col-sm-4">
+      <div class="card">
+    	<img src="{{report.file.url}}" class="card-img-top" alt="...">
+        <div class="card-body">
+        <a class="card-tite" href="{%url 'details' report.slug %}"><h5 class="card-title">{{report.subject}}</h5></a>
+        <p class="card-text">{{report.message | truncatechars:200}}</p>
+         <i class="far fa-user"> {{report.name}} </i>
+        <hr>
+        <a href="{%url 'details' report.slug %}" class="btn btn-primary">Read More</a>
+
+      </div>
+    </div>
+  </div>
+    {% endfor %}
+  </div>
+</div>
+  
+{% endblock %}
