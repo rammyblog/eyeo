@@ -26,7 +26,7 @@ MEDIA_DIR = os.path.join(BASE_DIR,'media')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'eyeo.herokuapp.com']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'demo-witness.herokuapp.com']
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 # Application definition
