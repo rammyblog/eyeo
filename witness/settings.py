@@ -31,7 +31,21 @@ ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'demo-witness.herokuapp.co
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
-DATABASES['default'] =  dj_database_url.config()
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'jrcqwtfbojfiuc',
+        'USER': 'jrcqwtfbojfiuc',
+        'PASSWORD': '9b31e9e6983d241dbfdbe4b4e1085fa76b9e8252cfae9e90c189986a3cc1e390',
+        'HOST': 'ec2-107-22-162-8.compute-1.amazonaws.com',
+        'PORT': '5432',
+    }
+}
+
+...
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 # Application definition
 
 INSTALLED_APPS = [
