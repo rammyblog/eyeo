@@ -52,7 +52,7 @@ def search(request):
 			context = {'new_search':new_search}
 			return render(request, 'rammyblog/search.html', context)
 		else:
-			return render(request, 'rammyblog/404.html')
+			return render(request, 'rammyblog/search.html')
 
 	except MultiValueDictKeyError as e:
 		return render(request, 'rammyblog/404.html')
