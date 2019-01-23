@@ -1,1 +1,1 @@
-web: gunicorn witness.wsgi --log-file -
+web: gunicorn witness:app
