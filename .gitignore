@@ -4,6 +4,7 @@ __pycache__
 myvenv
 db.sqlite3
 Procfile
-requirements.te
+requirements.txt
 /static
+/media
 .DS_Store
