@@ -22,30 +22,30 @@ MEDIA_DIR = os.path.join(BASE_DIR,'media')
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = '=9gag!t#clmm1rr=%$w5v3%$ot3-(nzqf=gn#u(9r3-$jv$4d4'
+SECRET_KEY = '=9gag!t#clmm1rr=%$w5v3%$ot3-(nzqf=gn#u(9r3-$jv$4d4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'demo-witness.herokuapp.com']
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
+# SECRET_KEY = os.environ.get('SECRET_KEY')
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'jrcqwtfbojfiuc',
-        'USER': 'jrcqwtfbojfiuc',
-        'PASSWORD': '9b31e9e6983d241dbfdbe4b4e1085fa76b9e8252cfae9e90c189986a3cc1e390',
-        'HOST': 'ec2-107-22-162-8.compute-1.amazonaws.com',
-        'PORT': '5432',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'jrcqwtfbojfiuc',
+#         'USER': 'jrcqwtfbojfiuc',
+#         'PASSWORD': '9b31e9e6983d241dbfdbe4b4e1085fa76b9e8252cfae9e90c189986a3cc1e390',
+#         'HOST': 'ec2-107-22-162-8.compute-1.amazonaws.com',
+#         'PORT': '5432',
+#     }
+# }
 
-...
+# ...
 
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+# db_from_env = dj_database_url.config(conn_max_age=500)
+# DATABASES['default'].update(db_from_env)
 # Application definition
 
 INSTALLED_APPS = [
@@ -95,12 +95,12 @@ WSGI_APPLICATION = 'witness.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 
 # Password validation
@@ -144,13 +144,13 @@ STATIC_URL = '/static/'
 #location where django collect all static files
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 # location where you will store your static files
-STATICFILES_DIRS = [os.path.join(BASE_DIR,'witness/static')
-]
+STATICFILES_DIRS = [os.path.join(BASE_DIR,'witness/static')]
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL= '/media/'
 EMAIL_HOST = 'smtp.zoho.com'
-EMAIL_HOST_USER = 'admin@rammyblog.com.ng'
-EMAIL_HOST_PASSWORD = 'timilehin'
+EMAIL_HOST_USER = 'tunde@rammyblog.com.ng'
+EMAIL_HOST_PASSWORD = 'timilehin3151'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False

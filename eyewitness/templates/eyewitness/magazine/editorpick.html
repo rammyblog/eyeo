@@ -1,0 +1,47 @@
+							<div class="single-sidebar-widget editors-pick-widget">
+									<h6 class="title">Editor’s Pick</h6>
+									{% for report in picks %}
+									{% if forloop.first %}
+									<div class="editors-pick-post">
+										<div class="feature-img-wrap relative">
+											<div class="feature-img relative">
+												<div class="overlay overlay-bg"></div>
+												<img class="img-fluid" src="{{report.file.url}}" alt="">
+											</div>
+									
+										</div>
+										<div class="details">
+											<a href="{% url 'details' report.slug  %}">
+												<h4 class="mt-20">{{report.subject}}</h4>
+											</a>
+										<ul class="meta">
+											<li><a href="#"><span class="lnr lnr-user"></span>{{report.name}}</a></li>
+											<li><a href="#"><span class="lnr lnr-calendar-full"></span>{{report.date_pub | date:" F d, Y" }}</a></li>
+											<li><a href="#"><span class="lnr lnr-bubble"></span>{% if report.comments.count > 1 %}{{report.comments.count}} comments {% else %} {{report.comments.count}} comments{%endif%}</a></li>
+										</ul>
+											<p class="excert">
+												{{report.message | truncatechars:50}}	
+											</p>
+										</div>
+										
+									{% else %}
+										<div class="post-lists">
+										<div class="single-post d-flex flex-row">
+											<div class="thumb">
+												<img src="img/e2.jpg" alt="">
+											</div>
+											<div class="detail">
+												<a href="{% url 'details' report.slug  %}"><h6>{{report.subject}}</h6></a>
+												<ul class="meta">
+													<li><a href="#"><span class="lnr lnr-calendar-full"></span>03 April, 2018</a></li>
+													<li><a href="#"><span class="lnr lnr-bubble"></span>{% if report.comments.count > 1 %}{{report.comments.count}} comments {% else %} {{report.comments.count}} comment{%endif%}</a></li>
+												</ul>
+											</div>
+										</div>
+										
+										
+									</div>
+									{% endif %}
+									{% endfor %}
+
+								</div>

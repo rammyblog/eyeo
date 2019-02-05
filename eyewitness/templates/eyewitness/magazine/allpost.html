@@ -1,0 +1,75 @@
+{% extends 'eyewitness/magazine/base.html' %}
+{% block contents %}
+		
+		<div class="site-main-container">
+			<!-- Start top-post Area -->
+		
+			<!-- End top-post Area -->
+			<!-- Start latest-post Area -->
+			<section class="latest-post-area pb-120">
+				<div class="container no-padding">
+					<div class="row">
+						<div class="col-lg-8 post-list">
+							<!-- Start latest-post Area -->
+							<div class="latest-post-wrap">
+								<h4 class="cat-title">All Reports</h4>
+								{% for report in reports %}
+								<div class="single-latest-post row align-items-center">
+									<div class="col-lg-5 post-left">
+										<div class="feature-img relative">
+											<div class="overlay overlay-bg"></div>
+											<img class="img-fluid" src="{{report.file.url}}" alt="">
+										</div>
+										
+									</div>
+									<div class="col-lg-7 post-right">
+										<a href="{%url 'details' report.slug %}">
+											<h4>{{report.subject}}</h4>
+										</a>
+									<ul class="meta pb-20">
+										<li><a href="#"><span class="lnr lnr-user"></span>{{report.name | title}}</a></li>
+										<li><a href="#"><span class="lnr lnr-calendar-full"></span>{% if report.pub %} {{report.date_pub | date:" F d, Y" }}</abbr>{%else%} | Under Review | {%if user.is_staff  %} <a class="btn btn-default" href="{% url 'publish' report.slug %}">Publish</a> {% endif %}</a></li>
+										
+										  {% endif %}
+										<li><a href="#"><span class="lnr lnr-bubble"></span>06 </a></li>
+										<li> {%if  user.is_staff%} | <a href="{% url 'delete' report.slug %}">Delete Post</a>{% endif %}</li> 
+									</ul>
+										<p class="excert">
+											{{report.message | truncatechars:200}}
+										</p>
+									</div>
+								</div>
+								{% endfor %}
+						
+								
+								
+							</div>
+							<!-- End latest-post Area -->
+							
+							<!-- Start banner-ads Area -->
+							<div class="col-lg-12 ad-widget-wrap mt-30 mb-30">
+								{% include 'eyewitness/magazine/paginated_class.html' %}
+							</div>
+							<!-- End banner-ads Area -->
+							<!-- Start popular-post Area -->
+							
+							<!-- End relavent-story-post Area -->
+						</div>
+						<div class="col-lg-4">
+							<div class="sidebars-area">
+											
+								{% include 'eyewitness/magazine/editorpick.html' %}
+								{% include 'eyewitness/magazine/popular.html' %}
+	
+								<div class="single-sidebar-widget ads-widget">
+									<img class="img-fluid" src="img/sidebar-ads.jpg" alt="">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- End latest-post Area -->
+		</div>
+		
+{% endblock %}

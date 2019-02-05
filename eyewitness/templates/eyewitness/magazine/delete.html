@@ -1,0 +1,17 @@
+{% extends 'eyewitness/magazine/base.html' %}
+{% block contents %}
+{% load static %}
+{% load bootstrap4 %}
+ <form method="POST">
+  {% csrf_token %}
+          
+          <p>Are you sure you want to delete {{report.subject}}</p>
+          <input type="submit" value="Delete"/></form>
+          <p class="frmd">
+          <button onclick="window.history.back();" class="btn btn-default" type="button">Cancel</button>
+
+</form>
+{% endblock %}
+
+
+

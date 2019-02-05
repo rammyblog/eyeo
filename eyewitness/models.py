@@ -16,6 +16,8 @@ class Report(models.Model):
 	date_pub = models.DateTimeField(auto_now=True)
 	confrimed = models.PositiveIntegerField(default=0)
 	pub = models.BooleanField(default=False)
+	pick = models.BooleanField(default=False)
+	views = models.PositiveIntegerField(default=0)
 	
 	def __str__(self):
 		return self.name
@@ -27,7 +29,7 @@ class Report(models.Model):
 				self.slug = slugify(self.subject)
 				super().save(*args, **kwargs)
 		except IntegrityError:
-			self.slug = slugify(self.subject) + str(random.randint(1,200))
+			self.slug = slugify(self.subject)[:5] + str(self.message)[:5]
 			super().save(*args, **kwargs)
 		
 
@@ -37,6 +39,24 @@ class Report(models.Model):
 		self.pub = True
 		self.save()
 
+	# def confrim(self):
+	# 	self.confrimed += 1
+	# 	self.save()
+
 
 	def get_absolute_url(self):
 		return reverse('details', kwargs={'slug':self.slug})
+
+
+class Comment(models.Model):
+	name = models.CharField(max_length=50)
+	message = models.CharField(max_length=500)
+	report = models.ForeignKey(Report, on_delete=models.CASCADE, related_name='comments')
+	created_at = models.DateTimeField(auto_now=True)
+
+
+
+	def __str__(self):
+		return self.message
+
+

@@ -1,0 +1,47 @@
+{% extends 'eyewitness/magazine/base.html' %}
+{% block contents %}
+  <section class="latest-post-area pb-120">
+        <div class="container no-padding">
+          <div class="row">
+
+    
+<div class="col-lg-8 post-list">
+              <!-- Start latest-post Area -->
+              <div class="latest-post-wrap">
+                <h4 class="cat-title">Search Results for  "{{search_name}}" </h4>
+                {% for report in  new_search %}
+                <div class="single-latest-post row align-items-center">
+                  <div class="col-lg-5 post-left">
+                    <div class="feature-img relative">
+                      <div class="overlay overlay-bg"></div>
+                      <img class="img-fluid" src="{{report.file.url}}" alt="">
+                    </div>
+                    
+                  </div>
+                  <div class="col-lg-7 post-right">
+                    <a href="{%url 'details' report.slug %}">
+                      <h4>{{report.subject}}</h4>
+                    </a>
+                    <ul class="meta">
+                      <li><a href="#"><span class="lnr lnr-user"></span>{{report.name}}</a></li>
+                      <li><a href="#"><span class="lnr lnr-calendar-full"></span>{{report.date_pub | date:" F d, Y" }}</a></li>
+                      <li><a href="#"><span class="lnr lnr-bubble"></span>06 Comments</a></li>
+                    </ul>
+                    <p class="excert">
+                      {{report.message | truncatechars:200}}
+                    </p>
+                  </div>
+                </div>
+                {% endfor %}
+            
+                
+                
+              </div>
+  </div>
+</div>
+</div>
+</section>
+
+{% endblock %}
+
+

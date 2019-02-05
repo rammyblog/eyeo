@@ -1,0 +1,163 @@
+{% extends 'eyewitness/magazine/base.html' %}
+{% block contents %}
+{% load bootstrap4 %}
+<style type="text/css">
+	
+	textarea {
+	resize: none;
+}
+.form-label {
+	font-size: 12px;
+	color: #5e9bfc;
+	margin: 0;
+	display: block;
+	opacity: 1;
+	-webkit-transition: .333s ease top, .333s ease opacity;
+	transition: .333s ease top, .333s ease opacity;
+}
+.form-control {
+	border-radius: 0;
+	border-color: #ccc;
+   	border-width: 0 0 2px 0;
+   	border-style: none none solid none;
+   	box-shadow: none;
+   	margin-left: 200px;
+}
+
+label{
+	margin-left: 200px;
+}
+
+.form-control:focus {
+	box-shadow: none;
+	border-color: #5e9bfc;
+}
+.js-hide-label {
+	opacity: 0; 	
+}
+.js-unhighlight-label {
+	color: #999 
+}
+.btn-start-order {
+	background: 0 0 #ffffff;
+    border: 1px solid #2f323a;
+    border-radius: 3px;
+    color: #2f323a;
+    font-family: "Raleway", sans-serif;
+    font-size: 16px;
+    line-height: inherit;
+    margin: 30px 0;
+    padding: 10px 50px;
+    text-transform: uppercase;
+    transition: all 0.25s ease 0s;
+}
+.btn-start-order:hover,.btn-start-order:active, .btn-start-order:focus {
+	border-color: #5e9bfc;
+	color: #5e9bfc;
+}
+
+
+</style>
+<!-- <div class="jumbotron">
+  <p class="display-4"> Submit An Eye Witness Report</p>
+<p class="lead">If you've witnessed or been the victim of crime, please report it here. It will help to bring the offender to justice and make sure this doesn't happen to anyone else. Just fill the form below to provide information about the report. The kind of information you provide here plays a huge part in how we change our society</p>
+<p class="lead">Is it an emergency?</p>
+<p class="lead">Does it feel like the situation could get heated or violent very soon? Is someone in immediate danger? Do you need support right away? If so, please call <b>767</b> now.</p>
+</div> -->
+<form method="POST" enctype="multipart/form-data" class="container">
+  {% csrf_token %}
+  <div class="container">
+  <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"> 
+      <br>                       
+        <h2>Submit An Eye witness Report</h2>
+      </div>
+  </div>
+ <div class="container">
+  <div class="row">
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-3">
+          <form id="contact-form" class="form" method="POST" role="form">
+              <div class="form-group">
+              {% bootstrap_form form %}
+          </div>
+                  
+            <div class="text-center">
+                  <button type="submit" class="btn btn-start-order">Submit</button>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>	
+</div>
+</form>
+<br>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+	// Test for placeholder support
+    $.support.placeholder = (function(){
+        var i = document.createElement('input');
+        return 'placeholder' in i;
+    })();
+
+    // Hide labels by default if placeholders are supported
+    if($.support.placeholder) {
+        $('.form-label').each(function(){
+            $(this).addClass('js-hide-label');
+        });  
+
+        // Code for adding/removing classes here
+        $('.form-group').find('input, textarea').on('keyup blur focus', function(e){
+            
+            // Cache our selectors
+            var $this = $(this),
+                $parent = $this.parent().find("label");
+					
+						switch(e.type) {
+							case 'keyup': {
+								 $parent.toggleClass('js-hide-label', $this.val() == '');
+							} break;
+							case 'blur': {
+								if( $this.val() == '' ) {
+                    $parent.addClass('js-hide-label');
+                } else {
+                    $parent.removeClass('js-hide-label').addClass('js-unhighlight-label');
+                }
+							} break;
+							case 'focus': {
+								if( $this.val() !== '' ) {
+                    $parent.removeClass('js-unhighlight-label');
+                }
+							} break;
+							default: break;
+						}
+						// previous implementation with ifs
+            /*if (e.type == 'keyup') {
+                if( $this.val() == '' ) {
+                    $parent.addClass('js-hide-label'); 
+                } else {
+                    $parent.removeClass('js-hide-label');   
+                }                     
+            } 
+            else if (e.type == 'blur') {
+                if( $this.val() == '' ) {
+                    $parent.addClass('js-hide-label');
+                } 
+                else {
+                    $parent.removeClass('js-hide-label').addClass('js-unhighlight-label');
+                }
+            } 
+            else if (e.type == 'focus') {
+                if( $this.val() !== '' ) {
+                    $parent.removeClass('js-unhighlight-label');
+                }
+            }*/
+        });
+    } 
+});
+</script>
+{% endblock %}
+
+
+
+

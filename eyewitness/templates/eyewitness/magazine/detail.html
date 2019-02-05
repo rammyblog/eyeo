@@ -1,0 +1,123 @@
+{% extends 'eyewitness/magazine/base.html' %}
+{% block contents %}
+{% load static %}
+{% load bootstrap4 %}
+			<!-- End top-post Area -->
+			<!-- Start latest-post Area -->
+	
+
+
+
+			<section class="latest-post-area pb-120">
+				<div class="container no-padding">
+					<div class="row">
+						<div class="col-lg-8 post-list">
+							<!-- Start single-post Area -->
+							<div class="single-post-wrap">
+{% if messages %}
+			<div class="alert alert-success" role="alert">
+			<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}><h4 class="alert-heading">{{ message }}</h4>
+	<p>You have successfully submitted the Report! and it is currently under <b>Moderation</b>, Check your email for the next steps</p>
+	</li>
+	 <hr>
+	<p class="mb-0">Don't forget to call 767 if its an emergency</p>
+    {% endfor %}
+</ul>
+</div>
+{% endif %}
+
+								<div class="feature-img-thumb relative">
+									<div class="overlay overlay-bg"></div>
+									<img class="img-fluid" src="{{report.file.url}}" alt="">
+								</div>
+								<div class="content-wrap">
+									<a href="#">
+										<h3>{{report.subject}}</h3>
+									</a>
+									<ul class="meta pb-20">
+										<li><a href="#"><span class="lnr lnr-user"></span>{{report.name | title}}</a></li>
+										<li><a href="#"><span class="lnr lnr-calendar-full"></span>{% if report.pub %} {{report.date_pub | date:" F d, Y" }}</abbr>{%else%} | Under Review | {%if user.is_staff  %} <a class="btn btn-default" href="{% url 'publish' report.slug %}">Publish</a> {% endif %}</a></li>
+										
+										  {% endif %}
+										<li><a href="#"><span class="lnr lnr-bubble"></span>{% if report.comments.count > 1 %}{{report.comments.count}} comments {% else %} {{report.comments.count}} comment{%endif%} </a></li>
+										<li><i class="fa fa-eye" style="font-size: 15px;"></i>  {{report.views}} {% if report.views > 1 %} views {% else %} view {% endif %} </a></li>
+										<li> {%if  user.is_staff%} | <a href="{% url 'delete' report.slug %}">Delete Post</a>{% endif %}</li> 
+									</ul>
+									<p>
+										{{report.message |linebreaks}}	
+									</p>
+								
+								<div class="comment-sec-area">
+									<div class="container">
+										<div class="row flex-column">
+											<h6>{{report.comments.count}} comments</h6>
+											{% for comment in comment %}
+											<div class="comment-list">
+												<div class="single-comment justify-content-between d-flex">
+													<div class="user justify-content-between d-flex">
+														<div class="thumb">
+															<img src="img/blog/c1.jpg" alt="">
+														</div>
+														<div class="desc">
+															<h5><a href="#">{{comment.name}}</a></h5>
+															<p class="date"> {{comment.created_at | date:" F d, Y " }} at {{comment.created_at | date:"P"}} </p>
+															<p class="comment">
+																{{comment.message  | linebreaks}}
+															</p>
+															{% if user.is_staff %}<a href="{% url 'delete' report.slug comment.id %}">Delete</a>{% endif %}
+														</div>
+													</div>
+
+												</div>
+											</div>
+											 {%empty%}
+											   <div class="container">
+          											<h5 class="card-header">No Comment Yet</h5>
+          										</div>
+											{% endfor %}
+											
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="comment-form">
+								<h4>Post Comment</h4>
+              					<form method="post" novalidate class="container">
+                						{%csrf_token%}
+               								{% bootstrap_form form layout='inline'  %}
+                						<div class="form-group">
+                					</div>
+                						<button type="submit" class="btn btn-primary">Submit</button>
+             							 </form>
+
+							</div>
+						</div>
+						<!-- End single-post Area -->
+					</div>
+					<div class="col-lg-4">
+						<div class="sidebars-area">
+
+								{% include 'eyewitness/magazine/editorpick.html' %}
+								{% include 'eyewitness/magazine/popular.html' %}
+	
+								<div class="single-sidebar-widget ads-widget">
+									<img class="img-fluid" src="img/sidebar-ads.jpg" alt="">
+								</div>
+								
+								
+							
+						
+
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- End latest-post Area -->
+	</div>
+	
+			
+{% endblock %}
